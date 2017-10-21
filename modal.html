@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Modal Window</title>
+ <style>
+  .modal {
+    z-index: 2;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    padding: 1rem;
+    border: 1px solid #cacaca;
+    border-radius: 0;
+    background-color: #fefefe;
+    position: relative;
+    top: 100px;
+    height: 200px;
+    width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-y: auto;
+  }
+
+  .modal__overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+    background-color: rgba(10, 10, 10, 0.45);
+    overflow-y: scroll;
+  }
+
+  button, .modal__button {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 1rem 0;
+    font-family: inherit;
+    padding: 0.85em 1em;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #1779ba;
+    color: #fefefe;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    height: 600px;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+  <div id="app">
+    <a class="modal__button" href="modal1">Open Modal 1</a>
+    <a class="modal__button" href="modal2">Open Modal 2</a>
+    <div class="modal__overlay">
+      <div class="modal" id="modal1">
+        <textarea></textarea>
+        <button>I do nothing!</button>
+      </div>
+    </div>
+    <div class="modal__overlay">
+      <div class="modal" id="modal2">
+        <h1>Awesome. I Have It.</h1>
+        <p class="lead">Your couch. It is mine.</p>
+        <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="jquery-3.2.1.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.modal__button').on('click', function(e) {
+        e.preventDefault();
+        $('.modal[id='+$(this).attr('href')+']').parent().show();
+      });
+
+      $('.modal__overlay').on('click', function(e) {
+        if ( e.target == $(this)[0] ) {
+          $(this).hide();
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
